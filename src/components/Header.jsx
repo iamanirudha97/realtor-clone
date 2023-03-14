@@ -1,14 +1,17 @@
 import { useLocation, useNavigate } from "react-router"
-export default function Header() {
+import { NavLink } from "react-router-dom"
+export default function Header() {    
     
-    const location = useLocation()
     const navigate = useNavigate()
-    
-    const pathMatchRoute = (route) => {
-        if(route === location.pathname){
-            return true
-        }
-    }
+
+    // const location = useLocation()
+    // const pathMatchRoute = (route) => {
+    //     if(route === location.pathname){
+    //         return true
+    //     }
+    // }
+
+    const classNames = "block py-3 text-sm font-semibold border-b-[3px] border-b-transparent text-gray-400"
 
   return (
     <div className="bg-white border-b shadow-sm sticky top-0 z-50">
@@ -20,17 +23,9 @@ export default function Header() {
             </div>
             <div>
                 <ul className="flex space-x-10">
-                    <li className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent 
-                    ${pathMatchRoute("/") && 'text-black border-b-red-500'}`} 
-                    onClick={() => navigate('/')} > Home </li>
-
-                    <li className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent 
-                    ${pathMatchRoute("/offers") && 'text-black border-b-red-500'}`} 
-                    onClick={() => navigate('/offers')}> Offers </li>
-
-                    <li className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent 
-                    ${pathMatchRoute("/sign-in") && 'text-black border-b-red-500'}`} 
-                    onClick={() => navigate('/sign-in')}> Sign In </li>
+                    <li>  <NavLink className={({isActive}) => (isActive ? classNames + '!text-black !border-b-red-500' : classNames)} exact to='/'>  Home </NavLink> </li>
+                    <li>  <NavLink className={({isActive}) => (isActive ? classNames + '!text-black !border-b-red-500' : classNames)} to="/offers">  Offers </NavLink> </li>
+                    <li>  <NavLink className={({isActive}) => (isActive ? classNames + '!text-black !border-b-red-500' : classNames)} to="/sign-in">  Sign In </NavLink> </li>                                     
                 </ul>
             </div>
         </header>
